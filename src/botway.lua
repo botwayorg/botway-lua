@@ -2,7 +2,13 @@ local yaml = require "lyaml"
 local path = require "path"
 local json = require "lunajson"
 
-local BotwayConfigFile = io.open(path.join(path.user_home(), ".botway", "botway.json"))
+local home = os.getenv("HOME")
+
+if os.getenv("OS") == "Windows_NT" then
+    home = os.getenv("USERPROFILE")
+end
+
+local BotwayConfigFile = io.open(path.join(home, ".botway", "botway.json"))
 
 if BotwayConfigFile == nil then
     print("ERROR: Botway config file not found")
